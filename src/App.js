@@ -21,9 +21,18 @@ function App() {
     email: "",
   })
 
+  const [quote, setQuote] = useState(0)
+
+  const [Id, setId] = useState("")
+
   function handleChange(event){
         let value = (event.target.value)
         setFormFields({ ...formFields, [event.target.name]: value });
+  }
+
+  function handleId(event){
+        let value = (event.target.value)
+        setId( value );
   }
 
   async function isBreedValid(species, breed) {
@@ -39,6 +48,13 @@ function App() {
     const payload = await response.json();
   
     return payload.length; // update this later -> if length is 0, say no breed found, if length is > 1, say be more specific
+  }
+
+
+  async function getQuote() {
+    let response = await fetch(`http://localhost:3000/quotes/${Id}`);
+    let data = await response.json()
+    setQuote(data.payload)
   }
 
   async function onSubmit(){
@@ -71,6 +87,7 @@ function App() {
         return;
       }
     
+      
   //add validation on the address
 
   // send the post request
@@ -81,6 +98,8 @@ function App() {
     method: "POST",
     body: JSON.stringify(formFields)
   })
+
+  alert("Form Submitted")
   }
   useEffect(() => {
     async function getnumofquote() {
@@ -133,6 +152,12 @@ function App() {
           <input type="text"  name="address" value={formFields.address} onChange={handleChange}></input>
         </div>
         <button onClick={onSubmit}>submit</button>
+      </div>
+      <div>
+        <label>User ID</label>
+        <input type="text"  name="Id" value={Id} onChange={handleId}></input>
+        <button onClick={getQuote}>Get Quote</button>
+        <h2>Yearly cost for your pets: {quote}</h2>
       </div>
     </div>
   );
