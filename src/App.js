@@ -9,6 +9,26 @@ function App() {
   const [status, setStatus] = useState("");
   const [isPending, setIsPending] = useState(true);
 
+
+  const [formFields, setFormFields] = useState({
+    name: "",
+    gender: "",
+    species: "",
+    breedType: "",
+    breed: "",
+    age: 0,
+    address: "",
+    email: "",
+  })
+
+  function handleChange(event){
+        let value = (event.target.value)
+        setFormFields({ ...formFields, [event.target.name]: value });
+  }
+
+  function onSubmit(){
+
+  }
   useEffect(() => {
     async function getnumofquote() {
       await fetch(`${API_URL}/users`, { referrerPolicy: "no-referrer" })
@@ -43,25 +63,23 @@ function App() {
         </div>
         <div className="form">
           <label>name</label>
-          <input type="text"></input>
+          <input type="text" name="name" value={formFields.name} onChange={handleChange}></input>
           <label>gender</label>
-          <input type="text"></input>
+          <input type="text"  name="gender" value={formFields.gender} onChange={handleChange}></input>
           <label>email</label>
-          <input type="text"></input>
+          <input type="text"  name="email" value={formFields.email} onChange={handleChange}></input>
           <label>species</label>
-          <input type="text"></input>
+          <input type="text"  name="species" value={formFields.species} onChange={handleChange}></input>
           <label>breed type</label>
-          <input type="text"></input>
+          <input type="text"  name="breedType" value={formFields.breedType} onChange={handleChange}></input>
           <label>breed</label>
-          <input type="text"></input>
-          <label>age</label>
-          <input type="text"></input>
+          <input type="text"  name="breed" value={formFields.breed} onChange={handleChange}></input>
+          <label>age (months)</label>
+          <input type="text"  name="age" value={formFields.age} onChange={handleChange}></input>
           <label>address</label>
-          <input type="text"></input>
+          <input type="text"  name="address" value={formFields.address} onChange={handleChange}></input>
         </div>
-      </div>
-      <div className="quote-form">
-        <p>Your email:</p>
+        <button onClick={onSubmit}>submit</button>
       </div>
     </div>
   );
