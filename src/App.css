@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.dashboard {
+  height: 40vh;
+}
+
+.dashboard-container {
+  margin: auto;
+  margin-top: 40vh;
+  width: 50%;
+  min-width: 350px;
+}
+
+.quote-text {
+  text-align: center;
+  font-size: 24px;
+}
+
+.quote-number {
+  text-align: center;
+  color: coral;
+  font-size: 40px;
+  line-height: 20px;
+  font-weight: 600;
+}
