@@ -11,7 +11,7 @@ function App() {
 
 
   const [formFields, setFormFields] = useState({
-    name: "",
+    petsname: "",
     gender: "",
     species: "",
     breedType: "",
@@ -26,8 +26,61 @@ function App() {
         setFormFields({ ...formFields, [event.target.name]: value });
   }
 
-  function onSubmit(){
+  async function isBreedValid(species, breed) {
+    let api;
+    if (species === "cat") {
+      api = "https://api.thecatapi.com/v1/breeds";
+    } else if (species === "dog") {
+      api = "https://api.thedogapi.com/v1/breeds";
+    }
+  
+    console.log(api + "/search?q=" + breed.replace(" ", "_"));
+    const response = await fetch(api + "/search?q=" + breed.replace(" ", "_"));
+    const payload = await response.json();
+  
+    return payload.length; // update this later -> if length is 0, say no breed found, if length is > 1, say be more specific
+  }
 
+  async function onSubmit(){
+    // add in validation
+    // for (let i = 0; i < pets.length; i++) {
+    //   // check breed is valid, if it 
+    //   const results = isBreedValid(pets[i].species, pets[i].breed)
+  
+    //   if (results === 0) {
+    //     res.json({ success: false, message: "Invalid breed - none found."})
+    //     return;
+    //   }
+  
+    //   if (results > 1) {
+    //     res.json({ success: false, message: "Multiple breed founds - please be more specific."})
+    //     return;
+    //   }
+    // }
+    const results = await isBreedValid(formFields.species, formFields.breed)
+  
+      if (results === 0) {
+        alert("Invalid breed - none found.")
+        
+        return;
+      }
+  
+      if (results > 1) {
+        alert("Multiple breed founds - please be more specific.")
+        // res.json({ success: false, message: "Multiple breed founds - please be more specific."})
+        return;
+      }
+    
+  //add validation on the address
+
+  // send the post request
+  const response = await fetch('http://localhost:3000/quotes', {
+    headers: {
+      "content-type": "application/json"
+    },
+    method: "POST",
+    body: JSON.stringify(formFields)
+  })
   }
   useEffect(() => {
     async function getnumofquote() {
