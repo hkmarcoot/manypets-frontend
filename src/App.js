@@ -41,6 +41,24 @@ function App() {
           <p className="quote-text">The number of quotes served today</p>
           <p className="quote-number">{numOfQuote}</p>
         </div>
+        <div className="form">
+          <label>name</label>
+          <input type="text"></input>
+          <label>gender</label>
+          <input type="text"></input>
+          <label>email</label>
+          <input type="text"></input>
+          <label>species</label>
+          <input type="text"></input>
+          <label>breed type</label>
+          <input type="text"></input>
+          <label>breed</label>
+          <input type="text"></input>
+          <label>age</label>
+          <input type="text"></input>
+          <label>address</label>
+          <input type="text"></input>
+        </div>
       </div>
       <div className="quote-form">
         <p>Your email:</p>
