@@ -198,7 +198,7 @@ function App() {
         </div>
         <button onClick={onSubmit}>submit</button>
       </div>
-      <div>
+      <div className="user-search">
         <label>User ID</label>
         <input type="text" name="Id" value={Id} onChange={handleId}></input>
         <button onClick={getQuote}>Get Quote</button>
